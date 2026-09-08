@@ -1,0 +1,22 @@
+{
+  "name": "chayya-voice-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A Hindi and Marathi voice assistant powered by OpenAI and Maya Ananya.",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@ishubhamx/panchangam-js": "^3.0.0",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "openai": "^5.20.1"
+  }
+}

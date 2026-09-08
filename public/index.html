@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f2e8" />
+    <meta name="description" content="छाया — हिन्दी और मराठी में आपकी आवाज़ सहायक" />
+    <title>छाया · आपकी आवाज़ सहायक</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="voice-stage" data-state="off" aria-label="छाया आवाज़ सहायक">
+        <span class="button-rings" aria-hidden="true"></span>
+        <button id="voiceButton" class="voice-button" type="button" aria-label="छाया को शुरू करें">
+          <span class="listening-waves" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="mic-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><rect x="23" y="8" width="18" height="31" rx="9"/><path d="M16 29v3a16 16 0 0 0 32 0v-3M32 48v8M23 56h18"/></svg>
+          </span>
+          <span id="buttonLabel" class="button-label">छाया शुरू करें</span>
+          <span class="button-statuses">
+            <span><i id="micDot"></i><b id="micStatus">माइक बंद</b></span>
+            <span><i id="internetDot"></i><b id="internetStatus">इंटरनेट जाँच</b></span>
+          </span>
+        </button>
+        <span id="liveStatus" class="sr-only" role="status" aria-live="polite">माइक चालू करने के लिए बटन दबाएँ</span>
+      </section>
+
+      <section class="calendar-card" aria-label="इस महीने का कैलेंडर">
+        <div class="calendar-banner">
+          <div class="month-title">
+            <small>मुंबई · मराठी पंचांग</small>
+            <div><strong id="monthTitle"></strong><span id="yearTitle"></span></div>
+          </div>
+        </div>
+        <div class="panchang-today">
+          <div class="location-line">
+            <span aria-hidden="true">⌖</span>
+            <strong id="locationLabel">मुंबई, महाराष्ट्र</strong>
+            <small id="locationStatus">मुंबई स्थानानुसार</small>
+          </div>
+          <div class="lunar-heading">
+            <div><span>आजचे पंचांग</span><strong id="lunarDate">गणना सुरू आहे…</strong></div>
+            <div id="todayFestival" class="today-festival"></div>
+          </div>
+          <div class="panchang-facts">
+            <div><span>सूर्योदय</span><strong id="sunriseTime">—</strong></div>
+            <div><span>सूर्यास्त</span><strong id="sunsetTime">—</strong></div>
+            <div><span>चंद्रोदय</span><strong id="moonriseTime">—</strong></div>
+            <div><span>नक्षत्र</span><strong id="nakshatraName">—</strong></div>
+            <div><span>तिथी समाप्ती</span><strong id="tithiEndTime">—</strong></div>
+            <div><span>राहुकाळ</span><strong id="rahuTime">—</strong></div>
+          </div>
+        </div>
+        <div id="calendarWeekdays" class="calendar-weekdays"></div>
+        <div id="calendarGrid" class="calendar-grid" aria-live="polite"></div>
+        <div class="calendar-footer">
+          <span class="today-key"><i></i> आज · <strong id="todayLabel"></strong></span>
+          <span>स्थानिक सूर्योदयावर आधारित</span>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="alert" hidden></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,683 @@
+:root {
+  color-scheme: light;
+  font-family: "Noto Sans Devanagari", "Nirmala UI", system-ui, sans-serif;
+  background: #f3f0e9;
+  color: #2f2925;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 6%, rgba(185, 68, 54, 0.08), transparent 30%),
+    #f3f0e9;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100dvh;
+  padding: 12px;
+  place-items: center;
+}
+
+.calendar-card {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  width: min(100%, 900px);
+  height: min(calc(100dvh - 24px), 820px);
+  min-height: 0;
+  overflow: hidden;
+  background: #fffdf9;
+  border: 1px solid #ded8cd;
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(64, 48, 37, 0.11);
+}
+
+.calendar-banner {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  padding: 10px 18px;
+  background: #8c2f28;
+  color: #fffaf0;
+}
+
+.month-title {
+  display: grid;
+  gap: 2px;
+}
+
+.month-title small,
+.month-title strong,
+.month-title span {
+  margin: 0;
+}
+
+.month-title small {
+  font-size: 0.78rem;
+  opacity: 0.82;
+}
+
+.month-title > div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.month-title strong {
+  font-size: clamp(1.22rem, 2.4vw, 1.68rem);
+  line-height: 1.15;
+  font-weight: 750;
+}
+
+.month-title span {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.panchang-today {
+  padding: 10px 16px;
+  border-bottom: 1px solid #ece7df;
+  background: #fffaf2;
+}
+
+.location-line,
+.lunar-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.location-line span,
+.location-line strong,
+.location-line small,
+.lunar-heading span,
+.lunar-heading strong,
+.today-festival {
+  margin: 0;
+}
+
+.location-line {
+  justify-content: flex-start;
+  color: #70675f;
+  font-size: 0.7rem;
+}
+
+.location-line strong {
+  color: #39312b;
+}
+
+.location-line small {
+  margin-left: auto;
+}
+
+.lunar-heading span {
+  color: #70675f;
+  font-size: 0.72rem;
+}
+
+.lunar-heading {
+  margin-top: 3px;
+}
+
+.lunar-heading > div:first-child {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 7px;
+}
+
+.lunar-heading strong {
+  overflow: hidden;
+  color: #6f231f;
+  font-size: clamp(0.92rem, 1.8vw, 1.12rem);
+  font-weight: 750;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.today-festival {
+  max-width: 42%;
+  overflow: hidden;
+  color: #8c2f28;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panchang-facts {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.panchang-facts div {
+  min-width: 0;
+  padding: 5px 7px;
+  background: rgba(150, 124, 85, 0.07);
+  border: 1px solid rgba(134, 101, 65, 0.1);
+  border-radius: 8px;
+}
+
+.panchang-facts span,
+.panchang-facts strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panchang-facts span {
+  color: #776e66;
+  font-size: 0.62rem;
+}
+
+.panchang-facts strong {
+  margin-top: 1px;
+  color: #322b26;
+  font-size: 0.76rem;
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.calendar-weekdays {
+  min-height: 30px;
+  align-items: center;
+  background: #f7f3ec;
+  border-bottom: 1px solid #e5ded4;
+  color: #746961;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.calendar-weekdays span:first-child {
+  color: #a0312b;
+}
+
+.calendar-grid {
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+  min-height: 0;
+  background: #ded8ce;
+  gap: 1px;
+}
+
+.calendar-day {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  padding: 5px 6px;
+  background: #fffdf9;
+}
+
+.calendar-day.is-empty,
+.calendar-day.empty {
+  background: #faf7f1;
+}
+
+.calendar-day.is-today,
+.calendar-day.today {
+  background: #eef8ef;
+  box-shadow: inset 0 0 0 2px #278748;
+}
+
+.day-number {
+  display: inline-grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  color: #322b26;
+  border-radius: 50%;
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.day-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.moon-symbol {
+  font-size: 0.66rem;
+  opacity: 0.72;
+}
+
+.calendar-day:nth-child(7n + 1) .day-number {
+  color: #a0312b;
+}
+
+.is-today .day-number,
+.today .day-number {
+  background: #278748;
+  color: white;
+}
+
+.day-tithi,
+.day-festival {
+  display: -webkit-box;
+  margin: 3px 0 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  line-height: 1.24;
+}
+
+.day-tithi {
+  color: #70675f;
+  font-size: 0.62rem;
+  -webkit-line-clamp: 1;
+}
+
+.day-festival {
+  color: #8c2f28;
+  font-size: 0.61rem;
+  font-weight: 700;
+  -webkit-line-clamp: 2;
+}
+
+.calendar-footer {
+  display: flex;
+  min-height: 27px;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 100px 4px 12px;
+  color: #796f67;
+  background: #f7f3ec;
+  font-size: 0.66rem;
+  text-align: center;
+}
+
+.calendar-footer {
+  gap: 14px;
+}
+
+.today-key {
+  white-space: nowrap;
+}
+
+.today-key i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 3px;
+  background: #278748;
+  border-radius: 50%;
+}
+
+.voice-stage {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 30;
+  display: grid;
+  width: 104px;
+  height: 104px;
+  place-items: center;
+}
+
+.voice-button {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 88px;
+  height: 88px;
+  padding: 0;
+  cursor: pointer;
+  place-items: center;
+  color: #fff;
+  background: #278748;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 10px 26px rgba(18, 88, 43, 0.34);
+  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.voice-button:hover {
+  transform: translateY(-2px);
+  background: #20783e;
+}
+
+.voice-button:focus-visible {
+  outline: 4px solid rgba(39, 135, 72, 0.28);
+  outline-offset: 3px;
+}
+
+.voice-button::after {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 11px;
+  height: 11px;
+  content: "";
+  background: #b7d9bf;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.voice-stage[data-state="listening"] .voice-button::after,
+.voice-stage[data-state="capturing"] .voice-button::after,
+.voice-stage[data-state="processing"] .voice-button::after,
+.voice-stage[data-state="speaking"] .voice-button::after {
+  background: #68ef8b;
+  box-shadow: 0 0 0 4px rgba(104, 239, 139, 0.22);
+}
+
+.voice-stage[data-state="processing"] .voice-button {
+  background: #1f7650;
+}
+
+.voice-stage[data-state="speaking"] .voice-button {
+  background: #166f5b;
+}
+
+.mic-icon {
+  display: block;
+  width: 34px;
+  height: 34px;
+}
+
+.mic-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mic-icon rect {
+  fill: currentColor;
+}
+
+.mic-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.button-label,
+.button-statuses {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.button-rings {
+  position: absolute;
+  z-index: 1;
+  inset: 3px;
+  border: 2px solid rgba(39, 135, 72, 0.3);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.voice-stage[data-state="listening"] .button-rings,
+.voice-stage[data-state="capturing"] .button-rings,
+.voice-stage[data-state="speaking"] .button-rings {
+  animation: pulse-ring 1.7s ease-out infinite;
+}
+
+.listening-waves {
+  position: absolute;
+  z-index: 3;
+  bottom: 13px;
+  display: none;
+  gap: 3px;
+  pointer-events: none;
+}
+
+.listening-waves i {
+  width: 3px;
+  height: 9px;
+  background: #fff;
+  border-radius: 3px;
+  animation: wave 650ms ease-in-out infinite alternate;
+}
+
+.listening-waves i:nth-child(2) {
+  animation-delay: 110ms;
+}
+
+.listening-waves i:nth-child(3) {
+  animation-delay: 220ms;
+}
+
+.voice-stage[data-state="capturing"] .listening-waves,
+.voice-stage[data-state="speaking"] .listening-waves {
+  display: flex;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 50;
+  max-width: calc(100vw - 150px);
+  padding: 9px 13px;
+  color: #fff;
+  background: rgba(45, 38, 33, 0.92);
+  border-radius: 10px;
+  font-size: 0.78rem;
+  transform: translate(-50%, 16px);
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+}
+
+.toast.show {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.84);
+    opacity: 0.55;
+  }
+
+  100% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+}
+
+@keyframes wave {
+  from {
+    transform: scaleY(0.55);
+  }
+
+  to {
+    transform: scaleY(1.35);
+  }
+}
+
+@media (max-width: 600px), (max-height: 700px) {
+  .app-shell {
+    padding: 6px;
+  }
+
+  .calendar-card {
+    height: calc(100dvh - 12px);
+    border-radius: 16px;
+  }
+
+  .calendar-banner {
+    min-height: 54px;
+    padding: 8px 12px;
+  }
+
+  .month-title small {
+    font-size: 0.68rem;
+  }
+
+  .panchang-today {
+    padding: 7px 9px;
+  }
+
+  .location-line,
+  .lunar-heading span {
+    font-size: 0.62rem;
+  }
+
+  .lunar-heading strong {
+    font-size: 0.88rem;
+  }
+
+  .panchang-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3px;
+    margin-top: 5px;
+  }
+
+  .panchang-facts div {
+    padding: 3px 5px;
+    border-radius: 6px;
+  }
+
+  .panchang-facts span {
+    font-size: 0.54rem;
+  }
+
+  .panchang-facts strong {
+    font-size: 0.65rem;
+  }
+
+  .calendar-weekdays {
+    min-height: 25px;
+    font-size: 0.61rem;
+  }
+
+  .calendar-day {
+    padding: 3px;
+  }
+
+  .day-number {
+    width: 21px;
+    height: 21px;
+    font-size: 0.75rem;
+  }
+
+  .day-tithi {
+    margin-top: 2px;
+    font-size: 0.52rem;
+  }
+
+  .day-festival {
+    margin-top: 2px;
+    font-size: 0.5rem;
+    -webkit-line-clamp: 2;
+  }
+
+  .calendar-footer {
+    min-height: 24px;
+    padding: 3px 82px 3px 7px;
+    font-size: 0.56rem;
+  }
+
+  .voice-stage {
+    right: 10px;
+    bottom: 9px;
+    width: 88px;
+    height: 88px;
+  }
+
+  .voice-button {
+    width: 74px;
+    height: 74px;
+    border-width: 2px;
+  }
+
+  .mic-icon {
+    width: 29px;
+    height: 29px;
+  }
+
+  .button-rings {
+    inset: 2px;
+  }
+
+  .listening-waves {
+    bottom: 11px;
+  }
+
+  .toast {
+    left: 10px;
+    right: 100px;
+    bottom: 14px;
+    max-width: none;
+    font-size: 0.7rem;
+    transform: translateY(16px);
+  }
+
+  .toast.show {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 380px) {
+  .panchang-facts span {
+    display: none;
+  }
+
+  .panchang-facts strong {
+    margin: 0;
+  }
+
+  .day-festival {
+    -webkit-line-clamp: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
